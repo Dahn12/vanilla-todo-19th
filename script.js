@@ -60,3 +60,14 @@ function deleteDoneTodo(e){
         doneItem.classList.add('done-div'); //done lists는 따로 css 부여
     }
 }
+
+//doneLists의 삭제 버튼 클릭 함수
+doneLists.addEventListener('click', deleteDone);
+function deleteDone(e){
+    const item = e.target;
+
+    if(item.classList[0] === 'delete-button'){
+        const doneItem = item.parentElement;
+        doneItem.remove();
+    }
+}
