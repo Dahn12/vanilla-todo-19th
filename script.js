@@ -4,8 +4,8 @@ const todoLists = document.querySelector('.todo-lists'); //todo list목록
 const doneLists = document.querySelector('.done-lists'); //done list목록
 
 
-TodoButton.addEventListener('click', addTodo); //+ 버튼 클릭시 todo에 list를 추가
-
+//+ 버튼 클릭시 todo에 list를 추가
+TodoButton.addEventListener('click', addTodo); 
 function addTodo(event){
     event.preventDefault(); //event에 대한 기본 동작 실행 방지
     
@@ -42,3 +42,21 @@ function addTodo(event){
     inputField.value = '';
 }  
 
+//todoLists의 버튼 클릭 함수
+todoLists.addEventListener('click', deleteDoneTodo);
+function deleteDoneTodo(e){
+    const item = e.target;
+
+    //delete 버튼 클릭시 삭제
+    if(item.classList[0] === "delete-button"){
+        const todoItem = item.parentElement;
+        todoItem.remove();
+    }
+
+    //done 버튼 클릭시 donelists로 이동
+    if(item.classList[0] === "done-button"){
+        const doneItem = item.parentElement;
+        doneLists.appendChild(doneItem);
+        doneItem.classList.add('done-div'); //done lists는 따로 css 부여
+    }
+}
