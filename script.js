@@ -4,6 +4,20 @@ const todoLists = document.querySelector('.todo-lists'); //todo list목록
 const doneLists = document.querySelector('.done-lists'); //done list목록
 const date = document.querySelector('h1#date'); //날짜 표기
 const week = document.querySelector('h3#week'); //요일 표기
+const showTodoNumber = document.querySelector('.show-todo-number'); //todo list div 개수
+const showDoneNumber = document.querySelector('.show-done-number'); //done list div 개수
+
+
+//lists 개수 세기
+function todoListsNumber(){
+    const todoNumber = todoLists.getElementsByTagName("div");
+    const doneNumber = doneLists.getElementsByTagName("div");
+    
+    showTodoNumber.innerText = `${todoNumber.length} lists to do`;
+    showDoneNumber.innerText = `${doneNumber.length} lists are left! Way to go : )`
+}
+todoListsNumber();
+
 
 //+ 버튼 클릭시 todo에 list를 추가
 TodoButton.addEventListener('click', addTodo); 
@@ -37,6 +51,7 @@ function addTodo(event){
         todoDiv.appendChild(doneButton);
         todoDiv.appendChild(deleteButton);
         todoLists.appendChild(todoDiv);
+        todoListsNumber();
     }
 
     //input field 초기화
@@ -52,6 +67,7 @@ function deleteDoneTodo(e){
     if(item.classList[0] === "delete-button"){
         const todoItem = item.parentElement;
         todoItem.remove();
+        todoListsNumber();
     }
 
     //done 버튼 클릭시 donelists로 이동
@@ -59,6 +75,7 @@ function deleteDoneTodo(e){
         const doneItem = item.parentElement;
         doneLists.appendChild(doneItem);
         doneItem.classList.add('done-div'); //done lists는 따로 css 부여
+        todoListsNumber();
     }
 }
 
@@ -70,6 +87,7 @@ function deleteDone(e){
     if(item.classList[0] === 'delete-button'){
         const doneItem = item.parentElement;
         doneItem.remove();
+        todoListsNumber();
     }
 }
 
@@ -94,3 +112,5 @@ const getWeek = () => {
 };
 getDate();
 getWeek();
+
+
