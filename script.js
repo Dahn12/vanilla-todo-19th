@@ -2,7 +2,8 @@ const inputField = document.querySelector('.todo-input'); //todo 입력창
 const TodoButton = document.querySelector('.todo-input-button'); //+추가 버튼
 const todoLists = document.querySelector('.todo-lists'); //todo list목록
 const doneLists = document.querySelector('.done-lists'); //done list목록
-
+const date = document.querySelector('h1#date'); //날짜 표기
+const week = document.querySelector('h3#week'); //요일 표기
 
 //+ 버튼 클릭시 todo에 list를 추가
 TodoButton.addEventListener('click', addTodo); 
@@ -71,3 +72,25 @@ function deleteDone(e){
         doneItem.remove();
     }
 }
+
+
+
+//날짜 표기 함수
+const getDate = () => {
+    const newDate = new Date();
+    const year = newDate.getFullYear();
+    const month = newDate.getMonth() + 1; //js 자체 오류 보정
+    const day = newDate.getDate();
+
+    date.innerText = `${year}년 ${month}월 ${day}일`;
+};
+//요일 표기 함수
+const getWeek = () => {
+    const daysOfWeek = ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"];
+    const newDate = new Date();
+    const newWeek = daysOfWeek[newDate.getDay()];
+
+    week.innerText = `${newWeek}`;
+};
+getDate();
+getWeek();
