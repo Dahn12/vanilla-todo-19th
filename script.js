@@ -14,7 +14,7 @@ function todoListsNumber(){
     const doneNumber = doneLists.getElementsByTagName("div");
     
     showTodoNumber.innerText = `${todoNumber.length} lists to do`;
-    showDoneNumber.innerText = `${doneNumber.length} lists are left! Way to go : )`
+    showDoneNumber.innerText = `${doneNumber.length} lists are done! Way to go : )`
 }
 todoListsNumber();
 
@@ -32,24 +32,26 @@ function addTodo(event){
     const todoLi = document.createElement("li");
     todoLi.classList.add("todo-li");
    
-    //todo list done button 생성
-    const doneButton = document.createElement('button');
-    doneButton.innerHTML = '<i class="fa-solid fa-circle-check" style="color: #28c840;"></i>';
-    doneButton.classList.add("done-button");
    
     //todo list 삭제 button 생성
     const deleteButton = document.createElement('button');
-    deleteButton.innerHTML = '<i class="fa-solid fa-square-minus" style="color: #ff5f58;"></i>'
+    deleteButton.innerHTML = '<i class="fa-solid fa-circle-minus" style="color: #ff5f58;"></i>'
     deleteButton.classList.add('delete-button');
    
+     //todo list done button 생성
+     const doneButton = document.createElement('button');
+     doneButton.innerHTML = '<i class="fa-solid fa-circle-check" style="color: #28c840;"></i>';
+     doneButton.classList.add("done-button");
+
+
     //공백 여부에 따른 처리
     if(!inputField.value.trim())
             alert("할일을 추가해 보세요!");
     else{
         todoLi.innerText = inputField.value;
         todoDiv.appendChild(todoLi);
-        todoDiv.appendChild(doneButton);
         todoDiv.appendChild(deleteButton);
+        todoDiv.appendChild(doneButton);
         todoLists.appendChild(todoDiv);
         todoListsNumber();
     }
@@ -57,6 +59,15 @@ function addTodo(event){
     //input field 초기화
     inputField.value = '';
 }  
+
+//enter키 입력시 + 버튼 누른 효과
+inputField.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        TodoButton.click();
+    }
+});
+
 
 //todoLists의 버튼 클릭 함수
 todoLists.addEventListener('click', deleteDoneTodo);
@@ -112,5 +123,3 @@ const getWeek = () => {
 };
 getDate();
 getWeek();
-
-
